@@ -68,6 +68,8 @@
   .filename-tag { font-family: "D2Coding", "Consolas", monospace; font-size: 12.5px; color: var(--muted); margin-bottom: -8px; margin-top: 12px; }
 
   table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: 13.5px; }
+  .table-scroll { overflow-x: auto; margin: 12px 0 24px; -webkit-overflow-scrolling: touch; }
+  .table-scroll table { margin: 0; }
   th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; vertical-align: top; }
   th { background: #f4f6f8; font-weight: 600; }
   td code, th code { font-size: 12.5px; background: #f1f3f5; padding: 1px 5px; border-radius: 3px; }
@@ -142,6 +144,7 @@
   }
   .diagram-wrap svg { display: block; margin: 0 auto; min-width: 620px; }
   .diagram-caption { font-size: 12.5px; color: var(--muted); text-align: center; margin: 6px 0 22px; }
+  .diagram-scroll-hint { display: none; font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
 
   /* ---- 파일 트리 목업 ---- */
   .file-tree {
@@ -167,6 +170,9 @@
     header.top h1 { font-size: 22px; }
     h3.sub { font-size: 15.5px; }
     .role-grid { flex-direction: column; }
+    .diagram-scroll-hint { display: block; }
+    .table-scroll table { min-width: 560px; }
+    table { font-size: 12.5px; }
   }
 
   html { scroll-behavior: smooth; }
@@ -238,6 +244,7 @@
     <tr><th>전체 총괄 명령</th><td>프로젝트 전체의 목표와 규칙을 정의하는 최상위 지시문. 모든 에이전트와 오케스트레이터가 공통으로 따라야 하는 원칙이 여기 담긴다.</td></tr>
   </table>
 
+  <div class="diagram-scroll-hint">👉 다이어그램이 화면보다 넓다면 좌우로 스크롤해서 전체를 볼 수 있다</div>
   <div class="diagram-wrap">
     <svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하네스 구조 다이어그램">
       <defs>
@@ -650,6 +657,13 @@ description: 급식알리미 앱에 새 기능을 기획하고 코드까지 만�
 
 </div>
 <script>
+  document.querySelectorAll('.container > table').forEach(function (table) {
+    var wrap = document.createElement('div');
+    wrap.className = 'table-scroll';
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
+
   document.querySelectorAll('.steps').forEach(function (list) {
     var items = list.querySelectorAll('li');
     var total = items.length;

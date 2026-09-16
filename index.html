@@ -166,6 +166,17 @@
   .back-to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
   .back-to-top:hover { filter: brightness(1.1); }
 
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 80px; }
+    header.top h1 { font-size: 24px; }
+    header.top p { font-size: 14px; }
+    h3.sub { font-size: 15.5px; }
+    .section-divider { margin: 36px 0 4px; font-size: 12px; }
+    .lesson-grid { gap: 10px; }
+    .lesson-card { padding: 16px 18px; }
+    .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; }
+  }
+
   @media print {
     body { font-size: 12px; }
     .reveal { opacity: 1 !important; transform: none !important; }
